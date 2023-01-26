@@ -1,0 +1,23 @@
+[
+    {
+        "id" : 1,
+        "productId" : 10,
+        "name" : "mango",
+        "totalPrice" : 100.99,
+        "quentity" : 5
+    },
+    {
+        "id" : 2,
+        "productId" : 13,
+        "name" : "rice",
+        "totalPrice" : 104.99,
+        "quentity" : 3
+    },
+    {
+        "id" : 3,
+        "productId" : 15,
+        "name" : "pen",
+        "totalPrice" : 84.99,
+        "quentity" : 8
+    }
+]

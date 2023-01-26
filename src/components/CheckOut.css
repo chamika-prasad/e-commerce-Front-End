@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.checkout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 10px;
+}
+
+.checkoutbox {
+    max-width: 500px;
+    margin: auto;
+    color: black;
+    border-radius: 20 px;
+}
+
+.paragraph {
+    margin: 0px;
+}
+
+.wrapbox .details {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.payment {
+    width: 100%;
+    height: 70px;
+    display: flex;
+
+    justify-content: space-between;
+    padding: 0 15px;
+    background-image: linear-gradient(to right, #e8ecf0 0%, #7b7e7e 51%, #aeb5be 100%);
+    border: none;
+    transition: 0.5s;
+    background-size: 200% auto;
+
+}
+
+
+.payment:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+.payment:hover .arrow {
+    transform: translate(15px);
+    transition: transform 0.2s ease-in;
+}
+
+.inputfied {
+    color: white;
+    background-color: #f4f5f8;
+    border: 2px solid transparent;
+    height: 60px;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+
+.inputfied:focus {
+    color: white;
+    background-color: #cdd0d2;
+    border: 2px solid #2d4dda;
+    box-shadow: none;
+}
+
+.words {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+::placeholder {
+    font-size: 14px;
+    font-weight: 600;
+}

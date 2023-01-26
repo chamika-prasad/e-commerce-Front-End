@@ -1,0 +1,11 @@
+[
+    {
+        "id" : 1,
+        "name" : "mango",
+        "category" : "fruit",
+        "description" : "This is fruit",
+        "price" : 10.99,
+        "quentity" : 5,
+        "imgUrl" : "/images/product.jpeg"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "id" : 1,
+        "name" : "mango",
+        "category" : "fruit",
+        "description" : "This is fruit",
+        "price" : 10.99,
+        "imgUrl" : "/images/product.jpeg"
+    },
+    {
+        "id" : 2,
+        "name" : "rice",
+        "category" : "food",
+        "description" : "This is food",
+        "price" : 15.32,
+        "imgUrl" : "/images/product.jpeg"
+    },
+    {
+        "id" : 3,
+        "name" : "purse",
+        "category" : "fansy",
+        "description" : "This is purse",
+        "price" : 105.19,
+        "imgUrl" : "/images/product.jpeg"
+    },
+    {
+        "id" : 4,
+        "name" : "asus",
+        "category" : "laptop",
+        "description" : "This is laptop",
+        "price" : 1099.56,
+        "imgUrl" : "/images/product.jpeg"
+    },
+    {
+        "id" : 5,
+        "name" : "pen",
+        "category" : "stationary",
+        "description" : "This is pen",
+        "price" : 5.64,
+        "imgUrl" : "/images/product.jpeg"
+    },
+    {
+        "id" : 6,
+        "name" : "book",
+        "category" : "stationary",
+        "description" : "This is book",
+        "price" : 12.97,
+        "imgUrl" : "/images/product.jpeg"
+    }
+]

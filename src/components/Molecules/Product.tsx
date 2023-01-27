@@ -1,8 +1,9 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Card,Col,Container, Row } from "react-bootstrap"
-import formatCurrency from "../utilities/formatCurrency"
+import formatCurrency from "../../utilities/formatCurrency"
 import {Routes,Route,useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 type ProductProps = {
 
@@ -29,11 +30,35 @@ type ProductProps = {
             setOrder(order-1)
         }
 
+        const buyNow = () => {
+            //var userEmail = "user@example.com"
+
+            var userEmail = Cookies.get('user_email')
+
+            if(userEmail == null){
+
+                alert('You need to login first')
+                navigate('/Login');
+
+            }else if(order == 0)
+            {
+                alert('Add more product')
+
+            }else{
+
+                let totalPrice = order*dataSet.price
+                
+                navigate(`/CheckOut/${userEmail}/${dataSet.productId}/${totalPrice}/${order}`);
+            }
+        }
+
         const addToCart = () => {
 
-            var userEmail = "user@example.com"
+            //var userEmail = "user@example.com"
 
-            if(userEmail == ""){
+            var userEmail = Cookies.get('user_email')
+
+            if(userEmail == null){
 
                 alert('You need to login first')
                 navigate('/Login');
@@ -53,6 +78,7 @@ type ProductProps = {
                      });
 
                      alert('Product added to cart successfully')
+                     navigate(`/Cart/${userEmail}`);
                 }
         }
 
@@ -100,7 +126,7 @@ type ProductProps = {
                                     </div>}                                                        
                                 </Card.Subtitle>     
                                 <div className='d-flex justify-content-between align-items-baseline '>
-                                    <span><a href="/CheckOut"><Button className='w-100' variant="success mt-4" size='lg'>Buy Now</Button></a></span>
+                                    <span><a href="/CheckOut"><Button className='w-100' variant="success mt-4" size='lg' onClick={buyNow}>Buy Now</Button></a></span>
                                     <span><Button variant="primary mt-4" size='lg' onClick={addToCart}>Add to Cart</Button></span>
                                 </div>                                                          
                         </Card.Body>                                                

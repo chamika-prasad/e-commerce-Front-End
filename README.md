@@ -1,46 +1,58 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# E-Commerce Application 
 
-## Available Scripts
+This is a simple Front-end application for managing some functions of an e-commerce site.
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+React TypeScript
+Redux toolkit
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation / Tools
 
-### `npm run build`
+ - [VS Code](https://code.visualstudio.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Install the Project
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+Open Vs Code and clone the repository.Then install node modules and dependancies by runing 'npm install' code in terminal.
+```
+    
+## Start Project
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Open the terminal and run 'npm start', and then application will run in the browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Key Features 
 
-## Learn More
+1. User can view all products in system.
+2. User can search products using product name or category name.
+3. User can view individual product details by clicking each product.
+4. User can view cart only when loged in to system.
+5. User can register to system using email and password.
+6. User can signin to system using user email and password.
+7. User can add individual product to cart.
+8. User can Palce order using individual product.
+9. User can choose multiple products in cart and can place order.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
+
+-User Register to System.
+
+-User loging to the system.
+
+-JWT tokens are used for user authentication and authorization.
+
+-User view all products, search for a product by product name or category name.
+
+-User add products to cart.
+
+-User place a order.
+

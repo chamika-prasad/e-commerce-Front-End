@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Row,Col,Container} from "react-bootstrap"
-import ProductDetail from "./../data/ProductDetails.json";
-import { Card } from "react-bootstrap"
-import formatCurrency from "../utilities/formatCurrency"
 import axios from 'axios';
-import Product from './Product';
+import Product from './../Molecules/Product';
+
 
 type ProductDetailsProps =
 {

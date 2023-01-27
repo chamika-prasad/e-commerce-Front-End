@@ -1,9 +1,7 @@
-import React from 'react'
 import {Container} from "react-bootstrap"
-import NavBar from '../components/NavBar'
-import PageName from '../components/PageName'
-import ProductList from '../components/ProductList'
-import SubNav from '../components/SubNav'
+import NavBar from '../components/Molecules/NavBar'
+import ProductList from '../components/Organisms/ProductList'
+import SubNav from '../components/Molecules/SubNav'
 
 export default function ProductsList() {
   return (

@@ -1,5 +1,4 @@
-import React from 'react'
-import SIgnUpInNavBar from '../components/SIgnUpInNavBar'
+import SIgnUpInNavBar from '../components/Templates/SIgnUpInNavBar'
 
 export default function SignIn() {
   return (

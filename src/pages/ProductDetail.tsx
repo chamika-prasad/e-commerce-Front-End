@@ -1,10 +1,7 @@
-import { type } from 'os'
-import React from 'react'
 import { useParams } from 'react-router-dom'
-import NavBar from '../components/NavBar'
-import PageName from '../components/PageName'
-import Product from '../components/Product'
-import ProductDetails from '../components/ProductDetails'
+import NavBar from '../components/Molecules/NavBar'
+import PageName from '../components/Atoms/PageName'
+import ProductDetails from '../components/Organisms/ProductDetails'
 
 export default function ProductDetail() {
 

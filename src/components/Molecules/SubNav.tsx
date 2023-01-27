@@ -1,7 +1,5 @@
-import { type } from '@testing-library/user-event/dist/type'
-import React from 'react'
-import PageName from './PageName'
-import SearchBar from './SearchBar'
+import PageName from './../Atoms/PageName'
+import SearchBar from './../Atoms/SearchBar'
 
 type SubNavProps = {
     pageName: string

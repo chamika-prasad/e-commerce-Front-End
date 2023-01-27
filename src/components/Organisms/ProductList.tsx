@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Row,Col,Container} from "react-bootstrap"
-import productList from "./../data/ProductList.json";
-import ProductAtribute from './ProductAtribute';
-import { Link } from 'react-router-dom';
+import ProductAtribute from './../Molecules/ProductAtribute';
 import axios from 'axios';
+import './../Molecules/ProductAtribute.css';
 
 
 export default function ProductList() {
@@ -26,8 +25,7 @@ export default function ProductList() {
   // console.log(dataSet);
 
   return (
- <>
-    
+ <div className="product">
     <Row xs={1} md={2} lg={4} className="g-3">
        {dataSet.map(item =>  ( 
 
@@ -36,15 +34,7 @@ export default function ProductList() {
          </Col> 
  
        ))}
-
-
- </Row>
-    </> 
-
-  //   <>
-  //  <button onClick={getUser}>button</button>
-  //   </>
-
-    
+    </Row>
+    </div>  
   )
 }

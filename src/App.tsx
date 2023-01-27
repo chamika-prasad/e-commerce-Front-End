@@ -3,13 +3,10 @@ import SignUp from './pages/SignUp';
 import ProductsList from './pages/ProductsList';
 import ProductDetail from './pages/ProductDetail';
 import {Routes,Route} from 'react-router-dom';
-import {Container} from "react-bootstrap"
-import ProductDetails from './components/ProductDetails';
-import Cart from './components/Cart';
 import CartPage from './pages/CartPage';
-import Footer from './components/Footer';
-import CheckOut from './components/CheckOut';
+import Footer from './components/Atoms/Footer';
 import Payment from './pages/Payment';
+import ProductSearch from './pages/ProductSearch';
 
 function App() {
   return (
@@ -19,15 +16,19 @@ function App() {
 
           <Route path='/' element={<ProductsList/>}/>
 
-          <Route path='/Cart/:userEmail' element={<CartPage/>}/>
+          <Route path='/Cart' element={<CartPage/>}/>
 
           <Route path='/ProductDetail/:productId' element={<ProductDetail/>}/>
+
+          <Route path='/SearchProduct/:searchName' element={<ProductSearch/>}/>
 
           <Route path='/Register' element={<SignUp/>}/>
 
           <Route path='/Login' element={<SignIn/>}/>
 
-          <Route path='/CheckOut' element={<Payment/>}/>
+          <Route path='/CheckOut/:userEmail/:productId/:totalPrice/:order' element={<Payment/>} />
+
+          {/* <Route path='/Button' element={<BtnComponent/>}/> */}
 
     </Routes>
     <Footer/>

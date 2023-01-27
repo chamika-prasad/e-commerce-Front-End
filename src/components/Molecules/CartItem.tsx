@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
-import formatCurrency from "../utilities/formatCurrency"
-import { cartContext,totalOrderValue } from '../context/CartContext';
+import formatCurrency from "../../utilities/formatCurrency"
 import './CartItem.css';
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux/es/exports';
 
 type CartItemProps = {
     item : {
@@ -17,10 +19,23 @@ type CartItemProps = {
     total : any
     productCount : any
     setProductCount :any
+
+    setcartProductList: any
+    cartProductList: any
 }
 
-export default function CartItem ({item,index,setTotal,total,productCount,setProductCount}: CartItemProps){
+export default function CartItem ({item,index,setTotal,total,productCount,setProductCount,setcartProductList,cartProductList}: CartItemProps){
 
+  const isAuthanticated = useSelector((state:any) => state.auth.isAuthanticated)
+
+  const navigate = useNavigate();
+  var userEmail = Cookies.get('user_email')
+  
+  if(userEmail == null){
+    
+    alert('You need to login first')
+    navigate('/Login');
+  }
 
   const handleChange =(event:React.ChangeEvent<HTMLInputElement>)=>{
     if(event.target.checked){
@@ -29,13 +44,25 @@ export default function CartItem ({item,index,setTotal,total,productCount,setPro
       let count = productCount + item.quantity
       setTotal(totalPrice)
       setProductCount(count)
+
+      //add item when checked
+      setcartProductList([...cartProductList,item.id])
+
+   
       
     }else{
      
       let totalPrice = total - item.totalPrice
       let count = productCount - item.quantity
+      let itemId = item.id
       setTotal(totalPrice)
       setProductCount(count)
+
+      //remove item when unchecked
+      var index = cartProductList.indexOf(itemId)
+      cartProductList.splice(index, 1);
+      setcartProductList(cartProductList)
+
     }
     
   }
@@ -45,7 +72,7 @@ export default function CartItem ({item,index,setTotal,total,productCount,setPro
 
 
     <div>
-      <cartContext.Provider value={totalOrderValue}>
+      {/* <cartContext.Provider value={totalOrderValue}> */}
       <Container>
         
         <div className=" row align-items-baseline justify-content-between shadow-sm" >
@@ -57,9 +84,17 @@ export default function CartItem ({item,index,setTotal,total,productCount,setPro
                                      
         </div>
         </Container>
-        </cartContext.Provider>
+        {/* </cartContext.Provider> */}
     </div>
    
   )
   
 }
+
+// function setremoveValue(id: number) {
+//   throw new Error('Function not implemented.');
+// }
+// function setProductCartList(arg0: any) {
+//   throw new Error('Function not implemented.');
+// }
+

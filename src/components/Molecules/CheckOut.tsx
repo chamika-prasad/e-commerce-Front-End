@@ -1,7 +1,56 @@
-import React from 'react'
 import './CheckOut.css';
+import formatCurrency from "../../utilities/formatCurrency"
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
-export default function CheckOut() {
+type checkOutProps = {
+    userEmail: any
+    productId: number
+    totalPrice: number
+    quantity: number
+}
+
+export default function CheckOut({userEmail,productId,totalPrice,quantity} : checkOutProps) {
+
+    
+    const navigate = useNavigate();
+
+        
+
+    const makePayment = () => {
+
+        var user = Cookies.get('user_email')
+
+        if(userEmail == null){
+
+            alert('You need to login first')
+            navigate('/Login');
+        }
+
+        axios.post(`https://localhost:7225/api/Oder/PlaceOrdersDirectly/${productId}`,
+        { 
+            userEmail:`${userEmail}`,
+            quantity:`${quantity}`,
+                    
+        }).then((res)=>{
+    
+        let temp=res.data.state
+    
+        if(temp == true){
+            alert('order placed successfully')
+            navigate('/');
+        }else{
+            alert('order placed Faild')
+            navigate('/');
+        }
+        
+          
+         }).catch((err)=>{
+          console.log(err)
+         })
+    }
+
   return (
     <div>
         <div className='checkout'>
@@ -12,7 +61,7 @@ export default function CheckOut() {
                 <div className="col-12">
                     <div className="d-flex flex-column">
                         <p className="text mb-1 paragraph words">Person Name</p>
-                        <input className="form-control mb-3 inputfied" type="text" placeholder="Name" value="Barry Allen"/>
+                        <input className="form-control mb-3 inputfied" type="text" placeholder="Name"/>
                     </div>
                 </div>
                 <div className="col-12">
@@ -34,10 +83,10 @@ export default function CheckOut() {
                     </div>
                 </div>
                 <div className="col-12">
-                    <div className="btn btn-primary mb-3 payment">
-                        <span className="ps-3">Pay $243</span>
+                    <button className="btn btn-primary mb-3 payment" type='submit' onClick={makePayment}>
+                        <span className="ps-3">Pay <>{formatCurrency (totalPrice)}</> </span>
                         <span className="fas fa-arrow-right arrow"></span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

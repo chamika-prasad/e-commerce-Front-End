@@ -26,7 +26,7 @@ export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
 
         e.preventDefault()
 
-        if(props.title == "SignIn"){
+        if(props.title === "SignIn"){
 
             axios.post(`https://localhost:7225/api/User/Login`,
         { 
@@ -63,9 +63,6 @@ export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
 
         }else{
 
-            console.log(email)
-            console.log(password)
-
             axios.post(`https://localhost:7225/api/User/Register`,
         { 
             email:`${email}`,
@@ -76,32 +73,29 @@ export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
             console.log(res)
         let temp = res.data.state
 
-        if(temp == true){
+        if(temp === true){
 
-            alert('User registration successfull')
+            alert(res.data.message)
             navigate('/Login');
 
-        }else{
-           alert(res.data.message)
-        }
-                 
-         }).catch((err)=>{
-          console.log(err)
-         })
-           
+        }       
+         }).catch(error => {
+            if(error.response.data.message){
+
+                alert(error.response.data.message)
+                navigate('/Register');
+
+            }else{
+                console.log(error)
+                navigate('/Register');
+            }
+          })           
         }
     }
 
   return (
    
     <div>
-        {/* <nav className="navbar  fixed-top navbar-expand-lg navbar-light bg-light">
-
-            <div className="navbar-brand">
-                <a href="/"><img className="logo" src={logo}  alt=""/></a>
-            </div>
-
-        </nav> */}
                     
         <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100 pt-5 pb-5">

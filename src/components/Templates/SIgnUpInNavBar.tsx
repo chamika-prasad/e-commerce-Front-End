@@ -38,25 +38,28 @@ export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
         let temp = res.data.state
         let token = res.data.detail.token
 
-    //console.log(res.data)
-        if(temp == true){
+        if(temp === true){
 
         Cookies.set('user_email', email)
         Cookies.set('jwt_token', token)
 
         disPatch(authActions.login())
 
-        
+        alert(res.data.message)
         navigate('/');
 
-        }else{
-           alert('Login faild')
-           navigate('/');
-        }
-                 
-         }).catch((err)=>{
-          console.log(err)
-         })
+        }        
+         }).catch(error => {
+            if(error.response.data.user){
+
+                alert(error.response.data.user)
+                navigate('/Login');
+
+            }else{
+                console.log(error)
+                navigate('/Login');
+            }
+          })
 
         }else{
 

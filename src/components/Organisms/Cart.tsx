@@ -6,9 +6,19 @@ import axios from 'axios';
 import formatCurrency from '../../utilities/formatCurrency';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
+import { UserState } from '../../Redux/userReducer';
 
 
 export default function Cart() {
+
+  const userLogin = useSelector<RootState, UserState>(
+    (state: RootState) => state.userLogin
+  );
+
+  const { userInfo } = userLogin;
+  const userEmail = userInfo ? userInfo.Email:null;
 
   const[cartProductList,setcartProductList] = useState<any[]>([]) //to colect checked product ids
   const [total,setTotal] = useState<any>(0) //to get total price
@@ -22,10 +32,12 @@ export default function Cart() {
 
   const handleChange = () => {
 
-    var userEmail = Cookies.get('user_email')
+    //var userEmail = Cookies.get('user_email')
 
     axios.post(`https://localhost:7225/api/Oder/PlaceOrderInCart/${userEmail}`,cartProductList)
     .then((res)=>{
+
+      console.log(userEmail,cartProductList)
 
     let state =res.data.state
     
@@ -47,7 +59,7 @@ export default function Cart() {
 
   useEffect(() => { 
 
-    var userEmail = Cookies.get('user_email')
+    //var userEmail = Cookies.get('user_email')
 
     if(userEmail == null){
     

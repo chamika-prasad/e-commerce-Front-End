@@ -5,6 +5,8 @@ import './CartItem.css';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux/es/exports';
+import { RootState } from '../../Redux/store';
+import { UserState } from '../../Redux/userReducer';
 
 type CartItemProps = {
     item : {
@@ -26,10 +28,17 @@ type CartItemProps = {
 
 export default function CartItem ({item,index,setTotal,total,productCount,setProductCount,setcartProductList,cartProductList}: CartItemProps){
 
-  const isAuthanticated = useSelector((state:any) => state.auth.isAuthanticated)
+  const userLogin = useSelector<RootState, UserState>(
+    (state: RootState) => state.userLogin
+  );
+
+  const { userInfo } = userLogin;
+  const userEmail = userInfo ? userInfo.Email:null;
+
+  //const isAuthanticated = useSelector((state:any) => state.auth.isAuthanticated)
 
   const navigate = useNavigate();
-  var userEmail = Cookies.get('user_email')
+  //var userEmail = Cookies.get('user_email')
   
   if(userEmail == null){
     

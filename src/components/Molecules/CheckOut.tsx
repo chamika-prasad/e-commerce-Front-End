@@ -3,6 +3,10 @@ import formatCurrency from "../../utilities/formatCurrency"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
+import { useSelector } from 'react-redux';
+import { UserState } from '../../Redux/userReducer';
+import { RootState } from '../../Redux/store';
+
 
 type checkOutProps = {
     userEmail: any
@@ -13,14 +17,12 @@ type checkOutProps = {
 
 export default function CheckOut({userEmail,productId,totalPrice,quantity} : checkOutProps) {
 
-    
     const navigate = useNavigate();
 
         
 
     const makePayment = () => {
 
-        var user = Cookies.get('user_email')
 
         if(userEmail == null){
 

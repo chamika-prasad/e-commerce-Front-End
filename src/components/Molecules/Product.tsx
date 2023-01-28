@@ -4,6 +4,9 @@ import { Button, Card,Col,Container, Row } from "react-bootstrap"
 import formatCurrency from "../../utilities/formatCurrency"
 import {Routes,Route,useNavigate} from 'react-router-dom';
 import Cookies from 'js-cookie'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
+import { UserState } from '../../Redux/userReducer';
 
 type ProductProps = {
 
@@ -19,6 +22,14 @@ type ProductProps = {
 }
 
     export default function Product({dataSet} : ProductProps){
+
+        const userLogin = useSelector<RootState, UserState>(
+            (state: RootState) => state.userLogin
+          );
+        
+          const { userInfo } = userLogin;
+          const userEmail = userInfo ? userInfo.Email:null;
+
         const [order,setOrder] = useState(0);
         const navigate = useNavigate();
 
@@ -33,7 +44,7 @@ type ProductProps = {
         const buyNow = () => {
             //var userEmail = "user@example.com"
 
-            var userEmail = Cookies.get('user_email')
+            //var userEmail = Cookies.get('user_email')
 
             if(userEmail == null){
 
@@ -53,10 +64,8 @@ type ProductProps = {
         }
 
         const addToCart = () => {
-
-            //var userEmail = "user@example.com"
-
-            var userEmail = Cookies.get('user_email')
+            
+           // var userEmail = Cookies.get('user_email')
 
             if(userEmail == null){
 

@@ -1,103 +1,133 @@
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.css';
-import { useState } from 'react';
-import './SIgnUpInNavBar.css';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.css'
+import { SyntheticEvent, useEffect, useState } from 'react'
+import './SIgnUpInNavBar.css'
+import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { authActions } from '../../Store';
-import { useDispatch } from 'react-redux';
+//import { authActions } from '../../Redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
+import { RootState } from '../../Redux/store'
+import { UserState } from '../../Redux/userReducer'
+import { login } from '../../Redux/userAction'
 
-
-type SIgnUpInNavBarProps = 
-{
-    title : string
-    action : string
+type SIgnUpInNavBarProps = {
+	title: string
+	action: string
 }
-export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
+export default function SIgnUpInNavBar(props: SIgnUpInNavBarProps) {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	//const [cookies, setCookie] = useCookies();
+	const disPatch = useDispatch()
 
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
-    //const [cookies, setCookie] = useCookies();
-    const disPatch = useDispatch()
+	const navigate = useNavigate()
 
-    const navigate = useNavigate();
+	const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+  			// eslint-disable-next-line react-hooks/rules-of-hooks
+  			const userLogin = useSelector<RootState, UserState>(
+    			(state: RootState) => state.userLogin
+  				);
+  			const { userInfo } = userLogin;
+  			// eslint-disable-next-line react-hooks/rules-of-hooks
+  			useEffect(() => {
+    			if (userInfo !== undefined && userInfo.Email) {
+      			navigate("/");
+    		} else {
+    			}
+  			}, [userInfo, navigate]);
 
-    const userOperation = (e:any) => {
+	const userOperation = (e: any) => {
+		e.preventDefault()
 
-        e.preventDefault()
+		if (props.title === 'SignIn') {
+			// axios
+			// 	.post(`https://localhost:7225/api/User/Login`, {
+			// 		email: `${email}`,
+			// 		password: `${password}`,
+			// 	})
+			// 	.then((res) => {
+			// 		let temp = res.data.state
+			// 		let token = res.data.detail.token
 
-        if(props.title == "SignIn"){
+			// 		if (temp === true) {
+			// 			Cookies.set('user_email', email)
+			// 			Cookies.set('jwt_token', token)
 
-            axios.post(`https://localhost:7225/api/User/Login`,
-        { 
-            email:`${email}`,
-            password:`${password}`,
-                    
-        }).then((res)=>{
-    
-        let temp = res.data.state
-        let token = res.data.detail.token
+			// 			disPatch(authActions.login())
 
-    //console.log(res.data)
-        if(temp == true){
+			// 			alert(res.data.message)
+			// 			navigate('/')
+			// 		}
+			// 	})
+			// 	.catch((error) => {
+			// 		if (error.response.data.user) {
+			// 			alert(error.response.data.user)
+			// 			navigate('/Login')
+			// 		} else {
+			// 			console.log(error)
+			// 			navigate('/Login')
+			// 		}
+			// 	})
 
-        Cookies.set('user_email', email)
-        Cookies.set('jwt_token', token)
 
-        disPatch(authActions.login())
+			// eslint-disable-next-line react-hooks/rules-of-hooks
+  			// eslint-disable-next-line react-hooks/rules-of-hooks
+  			// const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+  			// // eslint-disable-next-line react-hooks/rules-of-hooks
+  			// const userLogin = useSelector<RootState, UserState>(
+    		// 	(state: RootState) => state.userLogin
+  			// 	);
+  			// const { userInfo } = userLogin;
+  			// // eslint-disable-next-line react-hooks/rules-of-hooks
+  			// useEffect(() => {
+    		// 	if (userInfo !== undefined && userInfo.Email) {
+      		// 	navigate("/");
+    		// } else {
+    		// 	}
+  			// }, [userInfo, navigate]);
 
-        
-        navigate('/');
+  			
+    			e.preventDefault();
 
-        }else{
-           alert('Login faild')
-           navigate('/');
-        }
-                 
-         }).catch((err)=>{
-          console.log(err)
-         })
+				// eslint-disable-next-line react-hooks/rules-of-hooks
 
-        }else{
+    			dispatch(login(email, password));			
 
-            console.log(email)
-            console.log(password)
 
-            axios.post(`https://localhost:7225/api/User/Register`,
-        { 
-            email:`${email}`,
-            password:`${password}`,
-                    
-        }).then((res)=>{
-            
-            console.log(res)
-        let temp = res.data.state
+		} else {
+			axios
+				.post(`https://localhost:7225/api/User/Register`, {
+					email: `${email}`,
+					password: `${password}`,
+				})
+				.then((res) => {
+					console.log(res)
+					let temp = res.data.state
 
-        if(temp == true){
+					if (temp === true) {
+						alert(res.data.message)
+						navigate('/Login')
+					}
+				})
+				.catch((error) => {
+					if (error.response.data.message) {
+						alert(error.response.data.message)
+						navigate('/Register')
+					} else {
+						console.log(error)
+						navigate('/Register')
+					}
+				})
+		}
+	}
 
-            alert('User registration successfull')
-            navigate('/Login');
-
-        }else{
-           alert(res.data.message)
-        }
-                 
-         }).catch((err)=>{
-          console.log(err)
-         })
-           
-        }
-    }
-
-  return (
-   
-    <div>
+	return (
+		<div>
         {/* <nav className="navbar  fixed-top navbar-expand-lg navbar-light bg-light">
-
             <div className="navbar-brand">
                 <a href="/"><img className="logo" src={logo}  alt=""/></a>
             </div>
-
         </nav> */}
                     
         <div className="container h-100">
@@ -125,5 +155,5 @@ export default function SIgnUpInNavBar(props : SIgnUpInNavBarProps) {
             </div>
         </div>
     </div>
-  )
+	)
 }

@@ -1,26 +1,65 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 import CartItems from "./../Molecules/CartItem"
 import './Cart.css';
 import axios from 'axios';
 import formatCurrency from '../../utilities/formatCurrency';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
+import { UserState } from '../../Redux/userReducer';
 
 
 export default function Cart() {
+
+  const userLogin = useSelector<RootState, UserState>(
+    (state: RootState) => state.userLogin
+  );
+
+  const { userInfo } = userLogin;
+  const userEmail = userInfo ? userInfo.Email:null;
 
   const[cartProductList,setcartProductList] = useState<any[]>([]) //to colect checked product ids
   const [total,setTotal] = useState<any>(0) //to get total price
   const [productCount,setProductCount] = useState<any>(0) //to get total product count
   const[dataSet,setDataSet]=useState<any[]>([]) //to get data from backend
   const navigate = useNavigate();
-  console.log(cartProductList);
+  //console.log(cartProductList);
+
+  // productsList[] : `${cartProductList}`,
+      // userEmail : `${userEmail}`,
+
+  const handleChange = () => {
+
+    //var userEmail = Cookies.get('user_email')
+
+    axios.post(`https://localhost:7225/api/Oder/PlaceOrderInCart/${userEmail}`,cartProductList)
+    .then((res)=>{
+
+      console.log(userEmail,cartProductList)
+
+    let state =res.data.state
+    
+    if(state === true){
+      alert('order placed successfully')
+      navigate('/');
+    }else{
+      alert('order placed Faild')
+      navigate('/');
+    }
+
+     }).catch((err)=>{
+
+      alert('order placed Faild')
+        navigate('/');
+     })
+  }
 
 
   useEffect(() => { 
 
-    var userEmail = Cookies.get('user_email')
+    //var userEmail = Cookies.get('user_email')
 
     if(userEmail == null){
     
@@ -74,13 +113,8 @@ export default function Cart() {
             </Row>
 
             <Row className='my-4 '>
-                {/* <Col className="fs-2 text-center "><b></b></Col>
-                <Col className="fs-2 text-center"><b></b></Col>
-                <Col className="fs-2 text-center"><b>{productCount}</b></Col>
-                <Col className="fs-2 text-center"><b>{formatCurrency (total)}</b></Col>
-                <Col className="fs-2 text-center"><b></b></Col> */}
                 <div className="form-outline mb-4 d-flex flex-row-reverse">
-                    <button type="submit" className="btn btn-success btn-block btn-lg w-25"><b>Place Order</b></button>
+                    <Button type="submit" className="btn btn-success btn-block btn-lg w-25" onClick={handleChange}><b>Place Order</b></Button>
                 </div> 
             </Row>
     </div>

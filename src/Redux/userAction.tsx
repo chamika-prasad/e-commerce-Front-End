@@ -8,6 +8,7 @@ import {
 } from './userConstant'
 import { RootState } from './store'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export const login =
 	(
@@ -17,27 +18,12 @@ export const login =
 	async (
 		dispatch: ThunkDispatch<RootState, unknown, AnyAction>
 	): Promise<void> => {
-		console.log(email)
+		//console.log(email)
 
 		try {
 			dispatch({
 				type: USER_LOGIN_REQUEST,
 			})
-
-			// const response: any = await fetch(
-			//   "https://localhost:7075/api/User/login",
-			//   {
-			//     method: "POST",
-			//     headers: { "Content-Type": "application/json" },
-			//     credentials: "include",
-			//     body: JSON.stringify({
-			//       email,
-			//       password,
-			//     }),
-			//   }
-			// )
-			//   .then((response) => response.json())
-			//   .then((data) => console.log(data));
 
 			const response = await axios
 				.post('https://localhost:7225/api/User/Login', {
@@ -45,15 +31,24 @@ export const login =
 					password,
 				})
 				.then((response) => {
+
+					alert('Login successfull')
 					return response.data.detail
 				})
+				.catch((error) => {
+					if(error.response.data.user){
+						alert(error.response.data.user)
+					}else{
+						alert(error)
+					}
+				})
 
-			// console.log(response, '++++++++++++++++++++++')
-			// console.log(response.email)
-			alert('Login successfull')
+			console.log(response)
+			//alert('Login successfull')
 
 			const userData = {
 				Email: response.email,
+				Token: response.token,
 				//Password: response.password,				
 			}
 
@@ -77,14 +72,3 @@ export const login =
 		}
 	}
 
-export const logout =
-	(): ThunkAction<void, RootState, unknown, AnyAction> =>
-	async (dispatch: ThunkDispatch<RootState, unknown, AnyAction>) => {
-		localStorage.removeItem('userInfo')
-		dispatch({ type: USER_LOGOUT })
-
-		await fetch('https://localhost:7075/api/User/logout', {
-			headers: { 'Content-Type': 'application/json' },
-			credentials: 'include',
-		})
-	}

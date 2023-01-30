@@ -4,7 +4,6 @@ import CartItems from "./../Molecules/CartItem"
 import './Cart.css';
 import axios from 'axios';
 import formatCurrency from '../../utilities/formatCurrency';
-import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store';
@@ -25,16 +24,10 @@ export default function Cart() {
   const [productCount,setProductCount] = useState<any>(0) //to get total product count
   const[dataSet,setDataSet]=useState<any[]>([]) //to get data from backend
   const navigate = useNavigate();
-  //console.log(cartProductList);
-
-  // productsList[] : `${cartProductList}`,
-      // userEmail : `${userEmail}`,
 
   const handleChange = () => {
 
-    //var userEmail = Cookies.get('user_email')
-
-    axios.post(`https://localhost:7225/api/Oder/PlaceOrderInCart/${userEmail}`,cartProductList)
+    axios.post(`Oder/PlaceOrderInCart/${userEmail}`,cartProductList)
     .then((res)=>{
 
       console.log(userEmail,cartProductList)
@@ -59,8 +52,6 @@ export default function Cart() {
 
   useEffect(() => { 
 
-    //var userEmail = Cookies.get('user_email')
-
     if(userEmail == null){
     
       alert('You need to login first')
@@ -68,13 +59,15 @@ export default function Cart() {
 
     }else{
 
-    axios.get(`https://localhost:7225/api/Oder/GetAllProductsInCart/${userEmail}`).then((res)=>{
+    axios.get(`Oder/GetAllProductsInCart/${userEmail}`).then((res)=>{
 
     let products
     products=res.data
     setDataSet([...products]);
 
      }).catch((err)=>{
+
+        alert('No any product in cart')
         navigate('/Login');
      })
     }   

@@ -18,7 +18,7 @@ export default function SearchProduct(props : SearchProductProps) {
     let searchName = (props.searchName['searchName'])
 
     useEffect(() => { 
-        axios.post("https://localhost:7225/api/Product/SearchProduct",
+        axios.post("Product/SearchProduct",
         { 
             name:`${searchName}`
                     

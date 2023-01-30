@@ -6,11 +6,15 @@ import log_out from "./../Atoms/logout.png";
 import home_page from "./../Atoms/house.png";
 import {Container,Nav,Navbar as NavbarBs} from "react-bootstrap"
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store';
 import { UserState } from '../../Redux/userReducer';
+import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
 
 export default function NavBar() {
+
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
 
     const navigate = useNavigate();
 
@@ -23,7 +27,19 @@ export default function NavBar() {
 
       const logoutHandler = () => {
         localStorage.removeItem("userInfo")
-      };
+        alert("Logout successfully")
+        // navigate("/");
+      };
+
+    // useEffect(() => {
+    //   const listener = (e: StorageEvent) => {
+    //     if (e.key === 'userInfo' && e.newValue === null) {
+    //       navigate("/");
+    //     }
+    //   }
+    //   window.addEventListener('storage', listener);
+    //   return () => window.removeEventListener('storage', listener);
+    // }, []);
 
 
   return (

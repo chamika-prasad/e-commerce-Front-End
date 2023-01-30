@@ -41,53 +41,7 @@ export default function SIgnUpInNavBar(props: SIgnUpInNavBarProps) {
 		e.preventDefault()
 
 		if (props.title === 'SignIn') {
-			// axios
-			// 	.post(`https://localhost:7225/api/User/Login`, {
-			// 		email: `${email}`,
-			// 		password: `${password}`,
-			// 	})
-			// 	.then((res) => {
-			// 		let temp = res.data.state
-			// 		let token = res.data.detail.token
-
-			// 		if (temp === true) {
-			// 			Cookies.set('user_email', email)
-			// 			Cookies.set('jwt_token', token)
-
-			// 			disPatch(authActions.login())
-
-			// 			alert(res.data.message)
-			// 			navigate('/')
-			// 		}
-			// 	})
-			// 	.catch((error) => {
-			// 		if (error.response.data.user) {
-			// 			alert(error.response.data.user)
-			// 			navigate('/Login')
-			// 		} else {
-			// 			console.log(error)
-			// 			navigate('/Login')
-			// 		}
-			// 	})
-
-
-			// eslint-disable-next-line react-hooks/rules-of-hooks
-  			// eslint-disable-next-line react-hooks/rules-of-hooks
-  			// const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
-  			// // eslint-disable-next-line react-hooks/rules-of-hooks
-  			// const userLogin = useSelector<RootState, UserState>(
-    		// 	(state: RootState) => state.userLogin
-  			// 	);
-  			// const { userInfo } = userLogin;
-  			// // eslint-disable-next-line react-hooks/rules-of-hooks
-  			// useEffect(() => {
-    		// 	if (userInfo !== undefined && userInfo.Email) {
-      		// 	navigate("/");
-    		// } else {
-    		// 	}
-  			// }, [userInfo, navigate]);
-
-  			
+			
     			e.preventDefault();
 
 				// eslint-disable-next-line react-hooks/rules-of-hooks
@@ -97,7 +51,7 @@ export default function SIgnUpInNavBar(props: SIgnUpInNavBarProps) {
 
 		} else {
 			axios
-				.post(`https://localhost:7225/api/User/Register`, {
+				.post(`api/User/Register`, {
 					email: `${email}`,
 					password: `${password}`,
 				})

@@ -13,7 +13,7 @@ export default function ProductList() {
   let products
   
   useEffect(() => { 
-    axios.get("https://localhost:7225/api/Product/GetAllProducts").then((res)=>{
+    axios.get("Product/GetAllProducts").then((res)=>{
       products=res.data
       setDataSet([...products])
       

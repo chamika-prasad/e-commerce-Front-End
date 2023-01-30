@@ -35,10 +35,7 @@ export default function CartItem ({item,index,setTotal,total,productCount,setPro
   const { userInfo } = userLogin;
   const userEmail = userInfo ? userInfo.Email:null;
 
-  //const isAuthanticated = useSelector((state:any) => state.auth.isAuthanticated)
-
   const navigate = useNavigate();
-  //var userEmail = Cookies.get('user_email')
   
   if(userEmail == null){
     

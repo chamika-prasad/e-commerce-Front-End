@@ -18,7 +18,7 @@ export default function ProductDetails(props : ProductDetailsProps) {
   
   
   useEffect(() => { 
-    axios.get(`https://localhost:7225/api/Product/GetProduct/${id}`).then((res)=>{
+    axios.get(`Product/GetProduct/${id}`).then((res)=>{
 
     let temp={}
       temp=res.data

@@ -78,16 +78,31 @@ type ProductProps = {
 
             }else{
                     
-                axios.post(`https://localhost:7225/api/Oder/AddToCart/${dataSet.productId}/${userEmail}/${order}`)
+                axios.post(`Oder/AddToCart/${dataSet.productId}/${userEmail}/${order}`)
                     .then(function (response) {
-                        console.log(response);
+                        if(response.status == 200){
+
+                            alert('Product added to cart successfully')
+                            navigate("/Cart");
+
+                        }else{
+                            alert(response)
+                            navigate("/Cart");
+                        }
                      })
                     .catch(function (error) {
-                        console.log(error);
+                        if(error.response.status == 400){
+
+                            alert(error.response.data.message)
+                            navigate("/Cart"); 
+
+                        }else{
+                            alert(error)
+                            navigate("/Cart");
+                        }
                      });
 
-                     alert('Product added to cart successfully')
-                     navigate(`/Cart/${userEmail}`);
+                     
                 }
         }
 

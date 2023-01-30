@@ -30,7 +30,7 @@ export default function CheckOut({userEmail,productId,totalPrice,quantity} : che
             navigate('/Login');
         }
 
-        axios.post(`https://localhost:7225/api/Oder/PlaceOrdersDirectly/${productId}`,
+        axios.post(`Oder/PlaceOrdersDirectly/${productId}`,
         { 
             userEmail:`${userEmail}`,
             quantity:`${quantity}`,

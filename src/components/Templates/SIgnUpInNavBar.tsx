@@ -77,13 +77,7 @@ export default function SIgnUpInNavBar(props: SIgnUpInNavBarProps) {
 	}
 
 	return (
-		<div>
-        {/* <nav className="navbar  fixed-top navbar-expand-lg navbar-light bg-light">
-            <div className="navbar-brand">
-                <a href="/"><img className="logo" src={logo}  alt=""/></a>
-            </div>
-        </nav> */}
-                    
+		<div>                 
         <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100 pt-5 pb-5">
                 <div className="card shadow col-12 col-md-9 col-lg-7 col-xl-6 mt-5 mb-5" >
@@ -100,9 +94,14 @@ export default function SIgnUpInNavBar(props: SIgnUpInNavBarProps) {
 
                                 <div className="form-outline mb-4">
                                     <button type="submit" className="btn btn-success btn-block btn-lg w-100">{props.title}</button>
-                                </div>                                                                                        
-                                        
-                                <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href={props.action} className="fw-bold text-body"><u>{props.action} here</u></a></p>
+                                </div>   
+
+								{
+								props.action === 'Login' ? 
+									<p className="text-center text-muted mt-5 mb-0">Have already an account? <a href={props.action} className="fw-bold text-body"><u>{props.action} here</u></a></p>
+								 :
+									<p className="text-center text-muted mt-5 mb-0">Don't have an account? <a href={props.action} className="fw-bold text-body"><u>{props.action} here</u></a></p>
+								}                                                                                 
                             </form>
                     </div>
                 </div>

@@ -31,14 +31,13 @@ export const login =
 					password,
 				})
 				.then((response) => {
-
 					alert('Login successfull')
 					return response.data.detail
 				})
 				.catch((error) => {
-					if(error.response.data.user){
+					if (error.response.data.user) {
 						alert(error.response.data.user)
-					}else{
+					} else {
 						alert(error)
 					}
 				})
@@ -49,7 +48,7 @@ export const login =
 			const userData = {
 				Email: response.email,
 				Token: response.token,
-				//Password: response.password,				
+				//Password: response.password,
 			}
 
 			dispatch({
@@ -71,4 +70,3 @@ export const login =
 			//alert('login failed')
 		}
 	}
-

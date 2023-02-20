@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import './PageName.css';
 
 type PageNameProps = {
   title: string
@@ -7,7 +8,7 @@ type PageNameProps = {
 export default function PageName(props : PageNameProps) {
   return (
     <div>
-        <h2 className='py-2'>{props.title}</h2>
+        <h2 className='py-2 name'>{props.title}</h2>
     </div>
     
   )

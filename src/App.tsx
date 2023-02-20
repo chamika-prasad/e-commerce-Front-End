@@ -1,40 +1,46 @@
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import ProductsList from './pages/ProductsList';
-import ProductDetail from './pages/ProductDetail';
-import {Routes,Route} from 'react-router-dom';
-import CartPage from './pages/CartPage';
-import Footer from './components/Atoms/Footer';
-import Payment from './pages/Payment';
-import ProductSearch from './pages/ProductSearch';
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
+import ProductsList from './pages/ProductsList'
+import ProductDetail from './pages/ProductDetail'
+import { Routes, Route } from 'react-router-dom'
+import CartPage from './pages/CartPage'
+import Footer from './components/Atoms/Footer'
+import Payment from './pages/Payment'
+import ProductSearch from './pages/ProductSearch'
 
-function App() {
-  return (
-    <>
+// const App: React.FC = () => 
+function App(){
+	return (
+		<>
+			<Routes>
+				<Route path="/" element={<ProductsList />} />
 
-    <Routes>
+				<Route path="/Cart" element={<CartPage />} />
 
-          <Route path='/' element={<ProductsList/>}/>
+				<Route
+					path="/ProductDetail/:productId"
+					element={<ProductDetail />}
+				/>
 
-          <Route path='/Cart' element={<CartPage/>}/>
+				<Route
+					path="/SearchProduct/:searchName"
+					element={<ProductSearch />}
+				/>
 
-          <Route path='/ProductDetail/:productId' element={<ProductDetail/>}/>
+				<Route path="/Register" element={<SignUp />} />
 
-          <Route path='/SearchProduct/:searchName' element={<ProductSearch/>}/>
+				<Route path="/Login" element={<SignIn />} />
 
-          <Route path='/Register' element={<SignUp/>}/>
+				<Route
+					path="/CheckOut/:userEmail/:productId/:totalPrice/:order"
+					element={<Payment />}
+				/>
 
-          <Route path='/Login' element={<SignIn/>}/>
-
-          <Route path='/CheckOut/:userEmail/:productId/:totalPrice/:order' element={<Payment/>} />
-
-          {/* <Route path='/Button' element={<BtnComponent/>}/> */}
-
-    </Routes>
-    <Footer/>
-    </>
-
-  );
+				{/* <Route path='/Button' element={<BtnComponent/>}/> */}
+			</Routes>
+			<Footer />
+		</>
+	)
 }
 
-export default App;
+export default App

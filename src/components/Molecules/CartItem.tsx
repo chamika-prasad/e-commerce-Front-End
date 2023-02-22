@@ -73,10 +73,7 @@ export default function CartItem ({item,index,setTotal,total,productCount,setPro
     
   }
 
-
   return (
-
-
     <div>
       {/* <cartContext.Provider value={totalOrderValue}> */}
       <Container>

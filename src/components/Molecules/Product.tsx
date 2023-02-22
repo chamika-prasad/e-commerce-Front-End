@@ -57,7 +57,6 @@ export default function Product({ dataSet }: ProductProps) {
 	}
 
 	const addToCart = () => {
-		// var userEmail = Cookies.get('user_email')
 
 		if (userEmail == null) {
 			alert('You need to login first')
